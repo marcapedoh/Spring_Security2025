@@ -19,6 +19,7 @@ public class CustomerService {
 
     public Customer addCustomer(Customer customer) {
         customer.setRegistrationDate(new Date());
+        customer.setActiveSubscription(false);
         return customerRepository.save(customer);
     }
 

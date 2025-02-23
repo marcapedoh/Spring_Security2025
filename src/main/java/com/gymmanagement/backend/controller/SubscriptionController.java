@@ -7,33 +7,35 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+
+import static com.gymmanagement.backend.constant.Utils.APP_ROOT;
 
 @RestController
-@RequestMapping("/subscriptions")
+@RequestMapping(APP_ROOT+"subscriptions")
 public class SubscriptionController {
 
     @Autowired
     private SubscriptionService subscriptionService;
 
-   /* @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Subscription> subscribeCustomer(@RequestBody Subscription subscription) {
-        Subscription createdSubscription = subscriptionService.subscribeCustomer(subscription);
+        Subscription createdSubscription = subscriptionService.createSubscription(subscription);
         return ResponseEntity.ok(createdSubscription);
     }
 
-    @GetMapping("/{customerId}")
-    public ResponseEntity<Subscription> getCustomerSubscription(@PathVariable Long customerId) {
-        Subscription subscription = subscriptionService.getCustomerSubscription(customerId);
-        return ResponseEntity.ok(subscription);
-    }
+        @GetMapping("/customerSubscriptionByCustomerId/{customerId}")
+        public ResponseEntity<Subscription> getCustomerSubscription(@PathVariable Long customerId) {
+            Optional<Subscription> subscription = subscriptionService.getSubscriptionByCustomerId(customerId);
+            return ResponseEntity.ok(subscription.get());
+        }
+          @DeleteMapping("/delete/{subscriptionId}")
+          public ResponseEntity<Void> cancelSubscription(@PathVariable Long subscriptionId) {
+              subscriptionService.deleteSubscription(subscriptionId);
+              return ResponseEntity.noContent().build();
+          }
 
-    @DeleteMapping("/{subscriptionId}")
-    public ResponseEntity<Void> cancelSubscription(@PathVariable Long subscriptionId) {
-        subscriptionService.cancelSubscription(subscriptionId);
-        return ResponseEntity.noContent().build();
-    }
-*/
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<Subscription>> getAllSubscriptions() {
         List<Subscription> subscriptions = subscriptionService.getAllSubscriptions();
         return ResponseEntity.ok(subscriptions);

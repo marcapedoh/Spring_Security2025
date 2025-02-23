@@ -6,6 +6,7 @@ import com.gymmanagement.backend.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ public class CustomerService {
     private CustomerRepository customerRepository;
 
     public Customer addCustomer(Customer customer) {
+        customer.setRegistrationDate(new Date());
         return customerRepository.save(customer);
     }
 
@@ -29,7 +31,7 @@ public class CustomerService {
     }
 
     public Optional<Customer> searchCustomersByName(String name) {
-        return customerRepository.findByLastName(name);
+        return customerRepository.findByFirstName(name);
     }
 
     public Customer updateCustomer(Long id, Customer customerDetails) {

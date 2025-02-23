@@ -24,7 +24,7 @@ public class Customer {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name", nullable = false,unique = true)
     private String firstName;
 
     @Column(name = "registration_date", nullable = false)

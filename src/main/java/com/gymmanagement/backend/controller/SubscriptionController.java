@@ -12,6 +12,7 @@ import java.util.Optional;
 import static com.gymmanagement.backend.constant.Utils.APP_ROOT;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(APP_ROOT+"subscriptions")
 public class SubscriptionController {
 
